@@ -4,8 +4,6 @@
 import re
 from tkinter import filedialog as fd
 
-sql_file = open(fd.askopenfilename(), 'r')
-
 
 def get_code_title(code_snippet):
     """
@@ -22,7 +20,7 @@ def get_code_title(code_snippet):
         return ' '.join(type_name)
 
 
-def get_custom_code():
+def get_custom_code(sql_file):
     """
     loops through schema file and creates individual files for every table, trigger, procedure etc.
     :return: None.
@@ -41,7 +39,9 @@ def get_custom_code():
 
 
 def main():
-    get_custom_code()
+    sql_file = open(fd.askopenfilename(), 'r')
+    get_custom_code(sql_file)
+    sql_file.close()
 
 
 if __name__ == "__main__":
