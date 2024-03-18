@@ -39,9 +39,14 @@ def get_custom_code(sql_file):
 
 
 def main():
-    sql_file = open(fd.askopenfilename(), 'r')
-    get_custom_code(sql_file)
-    sql_file.close()
+    try:
+        sql_file = open(fd.askopenfilename(), 'r')
+        get_custom_code(sql_file)
+    except IOError:
+        print('No permission to open file')
+    finally:
+        sql_file.close()
+
 
 
 if __name__ == "__main__":
