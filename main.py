@@ -12,7 +12,7 @@ def get_code_title(code_snippet):
     :param code_snippet: a stripped string of SQL.
     :return: a new filename.
     """
-    list_to_ignore = ['CREATE', 'OR', 'REPLACE', '(']
+    list_to_ignore = ['CREATE', 'OR', 'REPLACE', '(']  # some keywords to ignore
 
     if re.search(r'^CREATE[0-9A-Z_. ()]*\n', code_snippet):  # Maybe change to filter out certain files
         title = re.search(r'^CREATE[0-9A-Z_. ()]*\n', code_snippet).group()
