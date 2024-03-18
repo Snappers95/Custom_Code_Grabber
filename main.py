@@ -7,6 +7,11 @@ sql_file = open('HFS CUSTOM TruckMateSchema.SQL', 'r')
 
 
 def get_code_title(code_snippet):
+    """
+    Takes SQL text and creates a filename from the text which includes what it is.
+    :param code_snippet: a stripped string of SQL.
+    :return: a new filename.
+    """
     list_to_ignore = ['CREATE', 'OR', 'REPLACE', '(']
 
     if re.search(r'^CREATE[0-9A-Z_. ()]*\n', code_snippet):
@@ -17,6 +22,10 @@ def get_code_title(code_snippet):
 
 
 def get_custom_code():
+    """
+    loops through schema file and creates individual files for every table, trigger, procedure etc.
+    :return: None.
+    """
     code = re.split(r"@\n", sql_file.read())
     counter = 0
     for i in code:
