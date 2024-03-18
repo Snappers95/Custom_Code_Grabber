@@ -2,8 +2,9 @@
 # Date: 3/16/2024
 
 import re
+from tkinter import filedialog as fd
 
-sql_file = open('<File_name>', 'r')
+sql_file = open(fd.askopenfilename(), 'r')
 
 
 def get_code_title(code_snippet):
