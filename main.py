@@ -3,7 +3,7 @@
 
 import re
 
-sql_file = open('HFS CUSTOM TruckMateSchema.SQL', 'r')
+sql_file = open('<File_name>', 'r')
 
 
 def get_code_title(code_snippet):
@@ -17,7 +17,7 @@ def get_code_title(code_snippet):
     if re.search(r'^CREATE[0-9A-Z_. ()]*\n', code_snippet):
         title = re.search(r'^CREATE[0-9A-Z_. ()]*\n', code_snippet).group()
         type_name = [item for item in title.split() if item not in list_to_ignore]
-        type_name[1] = type_name[1].strip('TMWIN.(')
+        type_name[1] = type_name[1].strip('TMWIN.(')  # This is to remove schema name prefix
         return ' '.join(type_name)
 
 
