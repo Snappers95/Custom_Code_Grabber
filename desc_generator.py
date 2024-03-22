@@ -1,27 +1,26 @@
 # Author: Jacob Laviolette
-# Date:
+# Date: 3/22/2024
 
-# import requests
 from openai import OpenAI
-import sys
 
-OPENAI_API_KEY = sys.argv[1]
+
+OPENAI_API_KEY = '<API_KEY>'
 
 
 def get_ai_description(prompt):
-    client = OpenAI(api_key=sys.argv[1])
-    chat_completion = client.chat.completions.create(
-        messages=[{
-            "role": "user",
-            "content": prompt
-        }],
-        model="gpt-3.5-turbo-0125"
+    client = OpenAI(api_key=OPENAI_API_KEY)
+    message = client.chat.completions.create(
+        model="gpt-4-turbo-preview",
+        messages=[
+            {"role": "system", "content": "Povide extremely short response describing the base functions of the provided SQL."},
+            {"role": "user", "content": prompt}
+        ],
     )
-    return chat_completion
+    return str(f'/* AI SUMMARY: {message.choices[0].message.content} */\n')
 
 
 def main():
-    print(get_ai_description('what day is it?'))
+    pass
 
 
 if __name__ == "__main__":

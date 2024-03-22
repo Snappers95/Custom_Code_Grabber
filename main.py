@@ -3,6 +3,7 @@
 
 import re
 from tkinter import filedialog as fd
+import desc_generator
 
 
 def get_code_title(code_snippet):
@@ -31,10 +32,12 @@ def get_custom_code(sql_file):
         if len(i) > 1:
             title = get_code_title(i.strip())
             code_file = open(str(title+'.sql'), 'w')
+            code_file.write(desc_generator.get_ai_description(i))  # generate summary
             code_file.write(i.strip())
             code_file.write('\n@\n')  # re-add the query terminator that was removed
             code_file.close()
             counter += 1
+
     print(counter, 'files created')
 
 
@@ -46,7 +49,6 @@ def main():
         print('No permission to open file')
     finally:
         sql_file.close()
-
 
 
 if __name__ == "__main__":
