@@ -1,30 +1,27 @@
 # Author: Jacob Laviolette
 # Date:
 
-import requests
+# import requests
 from openai import OpenAI
 import sys
 
 OPENAI_API_KEY = sys.argv[1]
 
 
-def get_ai_description():
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {OPENAI_API_KEY}"
-    }
-
-    response_json = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json={
-        "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": "ping"}],
-        "temperature": 0
-    }).json()
-
-    print(response_json[message])
+def get_ai_description(prompt):
+    client = OpenAI(api_key=sys.argv[1])
+    chat_completion = client.chat.completions.create(
+        messages=[{
+            "role": "user",
+            "content": prompt
+        }],
+        model="gpt-3.5-turbo-0125"
+    )
+    return chat_completion
 
 
 def main():
-    get_ai_description()
+    print(get_ai_description('what day is it?'))
 
 
 if __name__ == "__main__":
